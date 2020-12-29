@@ -19,6 +19,43 @@ class  DishDetail extends Component {
                 <div></div>
             );
     }
+    renderComments(dish) {
+        if (dish != null) {
+            
+            const coms = dish.comments.map((com) => {
+                
+                return (
+                    <ul key={com.id} className='list-unstyled'>
+                        <li>
+                            {com.comment}
+                        </li>
+                        <li>
+                            -- {com.author}, { }
+                            {
+                                new Intl.DateTimeFormat('en-US', {
+                                    month: 'short', day: '2-digit', year: 'numeric' 
+                                }).format(new Date(com.date))
+                            }
+                        </li>
+                    </ul>
+                );
+            });
+            
+            return (
+                <div className='p-3'>
+                    <h4>Comments</h4>
+                    {coms}
+                </div>
+            );
+
+
+        } else {
+            return (
+                <div></div>
+            );
+        }
+    }
+
     
     render(){
 
@@ -29,6 +66,7 @@ class  DishDetail extends Component {
                 {this.renderDish(this.props.dish)}
                 </div>
                 <div className=" col-12 col-md-5 m-1">
+                {this.renderComments(this.props.dish)}
                 </div>
 
             </div>
